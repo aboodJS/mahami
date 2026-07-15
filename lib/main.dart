@@ -27,7 +27,7 @@ class textInputBox extends StatefulWidget {
 
 class _textInputBoxState extends State<textInputBox> {
   TextEditingController controller = TextEditingController();
-  String text = "hi!";
+  List<String> userInput = [];
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -43,13 +43,13 @@ class _textInputBoxState extends State<textInputBox> {
             ),
             IconButton(
               onPressed: () => setState(() {
-                text = controller.text;
+                userInput.add(controller.text.trim());
               }),
               icon: Icon(Icons.add),
             ),
           ],
         ),
-        Text(text),
+        for (String task in userInput) Text(task),
       ],
     );
   }
