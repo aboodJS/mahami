@@ -1,4 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
+
+Future<String> getPath() async {
+  final directory = await getApplicationDocumentsDirectory();
+
+  return directory.path;
+}
+
+Future<File> get _localFile async {
+  final path = await getPath();
+  return File('$path/tasks.txt');
+}
+
+Future<File> writeTasks(String task) async {
+  final file = await _localFile;
+
+  // Write the file
+  return file.writeAsString('-$task\n', mode: FileMode.append);
+}
 
 void main() {
   runApp(const MainApp());
@@ -60,9 +80,12 @@ class _textInputBoxState extends State<textInputBox> {
             children: [
               Text(task),
               IconButton(
-                onPressed: () => setState(() {
-                  userInput.remove(task);
-                }),
+                onPressed: () => {
+                  setState(() {
+                    userInput.remove(task);
+                  }),
+                },
+
                 icon: Icon(Icons.delete),
               ),
             ],
