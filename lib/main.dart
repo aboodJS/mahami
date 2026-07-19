@@ -6,18 +6,14 @@ Future createFile(String str) async {
   final path = await getApplicationDocumentsDirectory();
   final file = File("${path.path}/tasks.txt");
 
-  await file.writeAsString("-$str\n", mode: FileMode.append);
+  await file.writeAsString("$str\n", mode: FileMode.append);
 }
 
-Future deleteItem(List<String> arr, String str) async {
+Future deleteItem(List<String> arr) async {
   final path = await getApplicationDocumentsDirectory();
   final file = File("${path.path}/tasks.txt");
 
-  arr.remove("-$str\n");
-
-  for (var item in arr) {
-    file.writeAsStringSync("-$item\n", mode: FileMode.writeOnly);
-  }
+  file.writeAsStringSync(arr.join("\n").trim());
 }
 
 void main() {
@@ -54,7 +50,7 @@ class _textInputBoxState extends State<textInputBox> {
     final file = File("${path.path}/tasks.txt");
     print(file.readAsStringSync());
     setState(() {
-      userInput = file.readAsStringSync().split("-");
+      userInput = file.readAsStringSync().trim().split("\n");
     });
   }
 
@@ -79,31 +75,41 @@ class _textInputBoxState extends State<textInputBox> {
               ),
             ),
             IconButton(
-              onPressed: () => setState(() {
-                if (controller.text.trim().isNotEmpty) {
-                  createFile(controller.text.trim());
-                  controller.clear();
-                } else {
-                  print("please enter a vaild string");
-                }
-              }),
+              onPressed: () async {
+                final path = await getApplicationDocumentsDirectory();
+                final file = File("${path.path}/tasks.txt");
+                print("${path.path}");
+                setState(() {
+                  if (controller.text.trim().isNotEmpty) {
+                    createFile(controller.text.trim());
+                    userInput.add(controller.text.trim());
+                    print(userInput);
+                    controller.clear();
+                  } else {
+                    print("please enter a vaild string");
+                  }
+                });
+              },
               icon: Icon(Icons.add),
             ),
           ],
         ),
         for (String task in userInput)
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(task),
-              IconButton(
-                onPressed: () => setState(() {
-                  deleteItem(userInput, task);
-                }),
-                icon: Icon(Icons.delete),
-              ),
-            ],
-          ),
+          if (task != "\n")
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(task),
+                IconButton(
+                  onPressed: () => setState(() {
+                    userInput.remove(task);
+                    print(userInput);
+                    deleteItem(userInput);
+                  }),
+                  icon: Icon(Icons.delete),
+                ),
+              ],
+            ),
       ],
     );
   }
