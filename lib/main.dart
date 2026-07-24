@@ -15,6 +15,9 @@ Future deleteItem(List<String> arr, String str) async {
   file.writeAsStringSync("${arr.join("\n")}\n", mode: FileMode.write);
 }
 
+ThemeData light = ThemeData.light(useMaterial3: true);
+ThemeData dark = ThemeData.dark(useMaterial3: true);
+
 void main() {
   runApp(const MainApp());
 }
@@ -25,6 +28,9 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: light,
+      darkTheme: dark,
+      themeMode: ThemeMode.system,
       home: Scaffold(
         body: textInputBox(),
         appBar: AppBar(title: Text("مهامي"), centerTitle: true),
@@ -96,7 +102,7 @@ class _textInputBoxState extends State<textInputBox> {
                 return Container(
                   width: constraints.maxWidth * 0.995,
                   decoration: BoxDecoration(
-                    color: Colors.green,
+                    color: Colors.green.shade800,
                     borderRadius: BorderRadius.all(Radius.circular(6)),
                   ),
                   child: Row(
