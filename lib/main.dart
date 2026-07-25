@@ -19,7 +19,7 @@ ThemeData light = ThemeData.light(useMaterial3: true);
 ThemeData dark = ThemeData.dark(useMaterial3: true);
 
 void main() {
-  runApp(const MainApp());
+  runApp(MaterialApp(home: MainApp()));
 }
 
 class MainApp extends StatelessWidget {
