@@ -19,7 +19,7 @@ ThemeData light = ThemeData.light(useMaterial3: true);
 ThemeData dark = ThemeData.dark(useMaterial3: true);
 
 void main() {
-  runApp(MaterialApp(home: MainApp()));
+  runApp(MainApp());
 }
 
 class MainApp extends StatelessWidget {
@@ -126,6 +126,45 @@ class _textInputBoxState extends State<textInputBox> {
                 );
               },
             ),
+        FloatingActionButton(
+          tooltip: "click to add a task",
+
+          backgroundColor: Colors.green.shade800,
+          onPressed: () => showDialog(
+            context: context,
+            builder: (BuildContext context) => Dialog(
+              child: LayoutBuilder(
+                builder: (context, cons) {
+                  return SizedBox(
+                    height: cons.maxHeight * 0.5,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "enter a task",
+                          style: TextStyle(
+                            fontWeight: FontWeight(700),
+                            fontSize: 40,
+                          ),
+                        ),
+                        SizedBox(
+                          width: cons.maxWidth * 0.3,
+                          child: TextField(),
+                        ),
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: Text("close"),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+          child: Icon(Icons.add, color: Colors.white),
+        ),
       ],
     );
   }
