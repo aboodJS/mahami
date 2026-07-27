@@ -69,32 +69,6 @@ class _textInputBoxState extends State<textInputBox> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.all(4),
-                child: TextField(controller: controller),
-              ),
-            ),
-            IconButton(
-              onPressed: () async {
-                setState(() {
-                  if (controller.text.trim().isNotEmpty) {
-                    userInput.add(controller.text.trim());
-                    createFile(controller.text.trim());
-                    controller.clear();
-                    print(userInput);
-                  } else {
-                    print("please enter a vaild string");
-                  }
-                });
-              },
-              icon: Icon(Icons.add),
-            ),
-          ],
-        ),
         for (String task in userInput)
           if (task.isNotEmpty)
             LayoutBuilder(
@@ -136,6 +110,7 @@ class _textInputBoxState extends State<textInputBox> {
               child: LayoutBuilder(
                 builder: (context, cons) {
                   return SizedBox(
+                    width: cons.maxHeight * 0.5,
                     height: cons.maxHeight * 0.5,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -149,12 +124,30 @@ class _textInputBoxState extends State<textInputBox> {
                           ),
                         ),
                         SizedBox(
-                          width: cons.maxWidth * 0.3,
-                          child: TextField(),
+                          width: cons.minWidth,
+                          child: TextField(
+                            controller: controller,
+                            autofocus: true,
+                          ),
                         ),
-                        TextButton(
-                          onPressed: () => Navigator.pop(context),
-                          child: Text("close"),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: Text("close"),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  createFile(controller.text.trim());
+                                  userInput.add(controller.text.trim());
+                                  controller.clear();
+                                });
+                              },
+                              child: Text("add task"),
+                            ),
+                          ],
                         ),
                       ],
                     ),
