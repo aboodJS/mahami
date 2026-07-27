@@ -73,29 +73,31 @@ class _textInputBoxState extends State<textInputBox> {
           if (task.isNotEmpty)
             LayoutBuilder(
               builder: (context, constraints) {
-                return Container(
-                  width: constraints.maxWidth * 0.995,
-                  decoration: BoxDecoration(
-                    color: Colors.green.shade800,
-                    borderRadius: BorderRadius.all(Radius.circular(6)),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconButton(
-                        onPressed: () => setState(() {
-                          userInput.removeWhere((e) => e == task);
-                          print(task);
-                          print(userInput);
-                          deleteItem(userInput, task);
-                        }),
-                        icon: Icon(Icons.check, color: Colors.white),
-                      ),
-                      Text(
-                        task,
-                        style: TextStyle(color: Colors.white, fontSize: 18),
-                      ),
-                    ],
+                return Center(
+                  child: Container(
+                    width: constraints.maxWidth * 0.85,
+                    decoration: BoxDecoration(
+                      color: Colors.green.shade800,
+                      borderRadius: BorderRadius.all(Radius.circular(6)),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        IconButton(
+                          onPressed: () => setState(() {
+                            userInput.removeWhere((e) => e == task);
+                            print(task);
+                            print(userInput);
+                            deleteItem(userInput, task);
+                          }),
+                          icon: Icon(Icons.check, color: Colors.white),
+                        ),
+                        Text(
+                          task,
+                          style: TextStyle(color: Colors.white, fontSize: 18),
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },
@@ -109,47 +111,54 @@ class _textInputBoxState extends State<textInputBox> {
             builder: (BuildContext context) => Dialog(
               child: LayoutBuilder(
                 builder: (context, cons) {
-                  return SizedBox(
-                    width: cons.maxHeight * 0.5,
-                    height: cons.maxHeight * 0.5,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "enter a task",
-                          style: TextStyle(
-                            fontWeight: FontWeight(700),
-                            fontSize: 40,
-                          ),
-                        ),
-                        SizedBox(
-                          width: cons.minWidth,
-                          child: TextField(
-                            controller: controller,
-                            autofocus: true,
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            TextButton(
-                              onPressed: () => Navigator.pop(context),
-                              child: Text("close"),
+                  return Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.white, width: 1),
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: SizedBox(
+                      width: cons.maxHeight * 0.5,
+                      height: cons.maxHeight * 0.5,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "enter a task",
+                            style: TextStyle(
+                              fontWeight: FontWeight(700),
+                              fontSize: 40,
                             ),
-                            TextButton(
-                              onPressed: () {
-                                setState(() {
-                                  createFile(controller.text.trim());
-                                  userInput.add(controller.text.trim());
-                                  controller.clear();
-                                });
-                              },
-                              child: Text("add task"),
+                          ),
+                          SizedBox(
+                            width: cons.minWidth,
+                            child: TextField(
+                              controller: controller,
+                              autofocus: true,
                             ),
-                          ],
-                        ),
-                      ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: Text("close"),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  setState(() {
+                                    createFile(controller.text.trim());
+                                    userInput.add(controller.text.trim());
+                                    controller.clear();
+                                    Navigator.pop(context);
+                                  });
+                                },
+                                child: Text("add task"),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 },
