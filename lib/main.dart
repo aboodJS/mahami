@@ -33,7 +33,16 @@ class MainApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       home: Scaffold(
         body: textInputBox(),
-        appBar: AppBar(title: Text("مهامي"), centerTitle: true),
+        appBar: AppBar(
+          actions: [
+            IconButton(
+              onPressed: null,
+              icon: Icon(Icons.menu, color: Colors.white),
+            ),
+          ],
+          title: Text("مهامي"),
+          centerTitle: true,
+        ),
       ),
     );
   }
@@ -67,34 +76,61 @@ class _textInputBoxState extends State<textInputBox> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        for (String task in userInput)
-          if (task.isNotEmpty)
-            LayoutBuilder(
-              builder: (context, constraints) {
-                return Center(
-                  child: Container(
-                    width: constraints.maxWidth * 0.85,
-                    decoration: BoxDecoration(
-                      color: Colors.green.shade800,
-                      borderRadius: BorderRadius.all(Radius.circular(6)),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        tooltip: "click to add a task",
+
+        backgroundColor: Colors.green.shade800,
+        onPressed: () => showDialog(
+          context: context,
+          builder: (BuildContext context) => Dialog(
+            child: LayoutBuilder(
+              builder: (context, cons) {
+                return Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white, width: 1),
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: SizedBox(
+                    width: cons.maxHeight * 0.5,
+                    height: cons.maxHeight * 0.5,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        IconButton(
-                          onPressed: () => setState(() {
-                            userInput.removeWhere((e) => e == task);
-                            print(task);
-                            print(userInput);
-                            deleteItem(userInput, task);
-                          }),
-                          icon: Icon(Icons.check, color: Colors.white),
-                        ),
                         Text(
-                          task,
-                          style: TextStyle(color: Colors.white, fontSize: 18),
+                          "enter a task",
+                          style: TextStyle(
+                            fontWeight: FontWeight(700),
+                            fontSize: 40,
+                          ),
+                        ),
+                        SizedBox(
+                          width: cons.minWidth,
+                          child: TextField(
+                            controller: controller,
+                            autofocus: true,
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: Text("close"),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  createFile(controller.text.trim());
+                                  userInput.add(controller.text.trim());
+                                  controller.clear();
+                                  Navigator.pop(context);
+                                });
+                              },
+                              child: Text("add task"),
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -102,60 +138,38 @@ class _textInputBoxState extends State<textInputBox> {
                 );
               },
             ),
-        FloatingActionButton(
-          tooltip: "click to add a task",
-
-          backgroundColor: Colors.green.shade800,
-          onPressed: () => showDialog(
-            context: context,
-            builder: (BuildContext context) => Dialog(
-              child: LayoutBuilder(
-                builder: (context, cons) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.white, width: 1),
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: SizedBox(
-                      width: cons.maxHeight * 0.5,
-                      height: cons.maxHeight * 0.5,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
+          ),
+        ),
+        child: Icon(Icons.add, color: Colors.white),
+      ),
+      body: Column(
+        children: [
+          for (String task in userInput)
+            if (task.isNotEmpty)
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  return Center(
+                    child: Container(
+                      width: constraints.maxWidth * 0.85,
+                      decoration: BoxDecoration(
+                        color: Colors.green.shade800,
+                        borderRadius: BorderRadius.all(Radius.circular(6)),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          IconButton(
+                            onPressed: () => setState(() {
+                              userInput.removeWhere((e) => e == task);
+                              print(task);
+                              print(userInput);
+                              deleteItem(userInput, task);
+                            }),
+                            icon: Icon(Icons.check, color: Colors.white),
+                          ),
                           Text(
-                            "enter a task",
-                            style: TextStyle(
-                              fontWeight: FontWeight(700),
-                              fontSize: 40,
-                            ),
-                          ),
-                          SizedBox(
-                            width: cons.minWidth,
-                            child: TextField(
-                              controller: controller,
-                              autofocus: true,
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              TextButton(
-                                onPressed: () => Navigator.pop(context),
-                                child: Text("close"),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  setState(() {
-                                    createFile(controller.text.trim());
-                                    userInput.add(controller.text.trim());
-                                    controller.clear();
-                                    Navigator.pop(context);
-                                  });
-                                },
-                                child: Text("add task"),
-                              ),
-                            ],
+                            task,
+                            style: TextStyle(color: Colors.white, fontSize: 18),
                           ),
                         ],
                       ),
@@ -163,11 +177,8 @@ class _textInputBoxState extends State<textInputBox> {
                   );
                 },
               ),
-            ),
-          ),
-          child: Icon(Icons.add, color: Colors.white),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
