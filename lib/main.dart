@@ -31,19 +31,7 @@ class MainApp extends StatelessWidget {
       theme: light,
       darkTheme: dark,
       themeMode: ThemeMode.system,
-      home: Scaffold(
-        body: textInputBox(),
-        appBar: AppBar(
-          actions: [
-            IconButton(
-              onPressed: null,
-              icon: Icon(Icons.menu, color: Colors.white),
-            ),
-          ],
-          title: Text("مهامي"),
-          centerTitle: true,
-        ),
-      ),
+      home: textInputBox(),
     );
   }
 }
@@ -77,6 +65,16 @@ class _textInputBoxState extends State<textInputBox> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: null,
+            icon: Icon(Icons.menu, color: Colors.white),
+          ),
+        ],
+        title: Text("مهامي"),
+        centerTitle: true,
+      ),
       floatingActionButton: FloatingActionButton(
         tooltip: "click to add a task",
 
