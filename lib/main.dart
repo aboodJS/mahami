@@ -65,16 +65,8 @@ class _textInputBoxState extends State<textInputBox> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            onPressed: null,
-            icon: Icon(Icons.menu, color: Colors.white),
-          ),
-        ],
-        title: Text("مهامي"),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: Text("مهامي"), centerTitle: true),
+      drawer: Drawer(child: Column(children: [Text("tasks"), Text("about")])),
       floatingActionButton: FloatingActionButton(
         tooltip: "click to add a task",
 
