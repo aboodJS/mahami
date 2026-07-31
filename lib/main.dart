@@ -66,7 +66,18 @@ class _textInputBoxState extends State<textInputBox> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("مهامي"), centerTitle: true),
-      drawer: Drawer(child: Column(children: [Text("tasks"), Text("about")])),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(color: Colors.blue),
+              child: Text('مهامي'),
+            ),
+            ListTile(title: Text("tasks"), onTap: () => Navigator.pop(context)),
+            ListTile(title: Text("about"), onTap: () => Navigator.pop(context)),
+          ],
+        ),
+      ),
       floatingActionButton: FloatingActionButton(
         tooltip: "click to add a task",
 
