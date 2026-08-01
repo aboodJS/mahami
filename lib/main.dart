@@ -73,8 +73,24 @@ class _textInputBoxState extends State<textInputBox> {
               decoration: BoxDecoration(color: Colors.blue),
               child: Text('مهامي'),
             ),
-            ListTile(title: Text("tasks"), onTap: () => Navigator.pop(context)),
-            ListTile(title: Text("about"), onTap: () => Navigator.pop(context)),
+            ListTile(
+              title: Text("tasks"),
+              onTap: () => {
+                Navigator.pop(context),
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => textInputBox()),
+                ),
+              },
+            ),
+            ListTile(
+              title: Text("about"),
+              onTap: () => {
+                Navigator.pop(context),
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => AboutPage()),
+                ),
+              },
+            ),
           ],
         ),
       ),
@@ -180,6 +196,18 @@ class _textInputBoxState extends State<textInputBox> {
               ),
         ],
       ),
+    );
+  }
+}
+
+class AboutPage extends StatelessWidget {
+  const AboutPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("مهامي")),
+      body: Center(child: Text("developed by Abdallah Jehad")),
     );
   }
 }
