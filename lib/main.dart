@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
+import "package:url_launcher/url_launcher.dart";
 
 Future createFile(String str) async {
   final path = await getApplicationDocumentsDirectory();
@@ -235,7 +236,27 @@ class AboutPage extends StatelessWidget {
         ),
       ),
       appBar: AppBar(title: Text("مهامي")),
-      body: Center(child: Text("developed by Abdallah Jehad")),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("developed by Abdallah Jehad"),
+            InkWell(
+              child: Text(
+                "source code",
+                style: TextStyle(decoration: TextDecoration.underline),
+              ),
+              onTap: () => launchUrl(
+                Uri(
+                  scheme: 'https',
+                  host: "github.com",
+                  path: 'aboodJS/mahami',
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
