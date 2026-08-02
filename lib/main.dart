@@ -66,7 +66,34 @@ class _textInputBoxState extends State<textInputBox> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("مهامي"), centerTitle: true),
-      drawer: Drawer(child: Column(children: [Text("tasks"), Text("about")])),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(color: Colors.blue),
+              child: Text('مهامي'),
+            ),
+            ListTile(
+              title: Text("tasks"),
+              onTap: () => {
+                Navigator.pop(context),
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => textInputBox()),
+                ),
+              },
+            ),
+            ListTile(
+              title: Text("about"),
+              onTap: () => {
+                Navigator.pop(context),
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => AboutPage()),
+                ),
+              },
+            ),
+          ],
+        ),
+      ),
       floatingActionButton: FloatingActionButton(
         tooltip: "click to add a task",
 
@@ -169,6 +196,46 @@ class _textInputBoxState extends State<textInputBox> {
               ),
         ],
       ),
+    );
+  }
+}
+
+class AboutPage extends StatelessWidget {
+  const AboutPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(color: Colors.blue),
+              child: Text('مهامي'),
+            ),
+            ListTile(
+              title: Text("tasks"),
+              onTap: () => {
+                Navigator.pop(context),
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => textInputBox()),
+                ),
+              },
+            ),
+            ListTile(
+              title: Text("about"),
+              onTap: () => {
+                Navigator.pop(context),
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => AboutPage()),
+                ),
+              },
+            ),
+          ],
+        ),
+      ),
+      appBar: AppBar(title: Text("مهامي")),
+      body: Center(child: Text("developed by Abdallah Jehad")),
     );
   }
 }
