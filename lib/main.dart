@@ -206,6 +206,34 @@ class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(color: Colors.blue),
+              child: Text('مهامي'),
+            ),
+            ListTile(
+              title: Text("tasks"),
+              onTap: () => {
+                Navigator.pop(context),
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => textInputBox()),
+                ),
+              },
+            ),
+            ListTile(
+              title: Text("about"),
+              onTap: () => {
+                Navigator.pop(context),
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => AboutPage()),
+                ),
+              },
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(title: Text("مهامي")),
       body: Center(child: Text("developed by Abdallah Jehad")),
     );
