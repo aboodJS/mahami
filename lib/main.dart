@@ -2,19 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import "package:url_launcher/url_launcher.dart";
-
-Future createFile(String str) async {
-  final path = await getApplicationDocumentsDirectory();
-  final file = File("${path.path}/tasks.txt");
-  await file.writeAsString("$str\n", mode: FileMode.append);
-}
-
-Future deleteItem(List<String> arr, String str) async {
-  final path = await getApplicationDocumentsDirectory();
-  final file = File("${path.path}/tasks.txt");
-  arr.removeWhere((e) => e == str);
-  file.writeAsStringSync("${arr.join("\n")}\n", mode: FileMode.write);
-}
+import "files_ops.dart";
 
 ThemeData light = ThemeData.light(useMaterial3: true);
 ThemeData dark = ThemeData.dark(useMaterial3: true);
