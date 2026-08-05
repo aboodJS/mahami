@@ -150,6 +150,18 @@ class _textInputBoxState extends State<textInputBox> {
       ),
       body: Column(
         children: [
+          if (userInput.every((str) => str.isEmpty))
+            Expanded(
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("there are no tasks", textAlign: TextAlign.center),
+                  ],
+                ),
+              ),
+            ),
+
           for (String task in userInput)
             if (task.isNotEmpty)
               LayoutBuilder(
