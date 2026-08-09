@@ -72,6 +72,15 @@ class _textInputBoxState extends State<textInputBox> {
               },
             ),
             ListTile(
+              title: Text("Dairy"),
+              onTap: () => {
+                Navigator.pop(context),
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => DairyPage()),
+                ),
+              },
+            ),
+            ListTile(
               title: Text("about"),
               onTap: () => {
                 Navigator.pop(context),
@@ -224,6 +233,15 @@ class AboutPage extends StatelessWidget {
               },
             ),
             ListTile(
+              title: Text("Dairy"),
+              onTap: () => {
+                Navigator.pop(context),
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => DairyPage()),
+                ),
+              },
+            ),
+            ListTile(
               title: Text("about"),
               onTap: () => {
                 Navigator.pop(context),
@@ -235,7 +253,7 @@ class AboutPage extends StatelessWidget {
           ],
         ),
       ),
-      appBar: AppBar(title: Text("مهامي")),
+      appBar: AppBar(title: Text("مهامي"), centerTitle: true),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -253,6 +271,60 @@ class AboutPage extends StatelessWidget {
                   path: 'aboodJS/mahami',
                 ),
               ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class DairyPage extends StatefulWidget {
+  const DairyPage({super.key});
+
+  @override
+  State<DairyPage> createState() => _DairyPageState();
+}
+
+class _DairyPageState extends State<DairyPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("مهامي"), centerTitle: true),
+
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(color: Colors.blue),
+              child: Text('مهامي'),
+            ),
+            ListTile(
+              title: Text("tasks"),
+              onTap: () => {
+                Navigator.pop(context),
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => textInputBox()),
+                ),
+              },
+            ),
+            ListTile(
+              title: Text("Dairy"),
+              onTap: () => {
+                Navigator.pop(context),
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => DairyPage()),
+                ),
+              },
+            ),
+            ListTile(
+              title: Text("about"),
+              onTap: () => {
+                Navigator.pop(context),
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => AboutPage()),
+                ),
+              },
             ),
           ],
         ),
