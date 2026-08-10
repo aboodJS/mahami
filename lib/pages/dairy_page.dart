@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import "../main.dart";
 
-class DairyInput extends StatefulWidget {
-  const DairyInput({super.key});
+class DairyPage extends StatefulWidget {
+  const DairyPage({super.key});
 
   @override
-  State<DairyInput> createState() => _DairyInputState();
+  State<DairyPage> createState() => _DairyPageState();
 }
 
-class _DairyInputState extends State<DairyInput> {
+class _DairyPageState extends State<DairyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +34,7 @@ class _DairyInputState extends State<DairyInput> {
               onTap: () => {
                 Navigator.pop(context),
                 Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => DairyInput()),
+                  MaterialPageRoute(builder: (context) => DairyPage()),
                 ),
               },
             ),

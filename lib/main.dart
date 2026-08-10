@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mahami/pages/dairy_page.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import "package:url_launcher/url_launcher.dart";
 import "files_ops.dart";
-import "pages/dairy_input.dart";
 
 ThemeData light = ThemeData.light(useMaterial3: true);
 ThemeData dark = ThemeData.dark(useMaterial3: true);
@@ -77,7 +77,7 @@ class _textInputBoxState extends State<textInputBox> {
               onTap: () => {
                 Navigator.pop(context),
                 Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => DairyInput()),
+                  MaterialPageRoute(builder: (context) => DairyPage()),
                 ),
               },
             ),
@@ -238,7 +238,7 @@ class AboutPage extends StatelessWidget {
               onTap: () => {
                 Navigator.pop(context),
                 Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => DairyInput()),
+                  MaterialPageRoute(builder: (context) => DairyPage()),
                 ),
               },
             ),
