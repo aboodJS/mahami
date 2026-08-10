@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import "package:url_launcher/url_launcher.dart";
 import "files_ops.dart";
+import "pages/dairy_input.dart";
 
 ThemeData light = ThemeData.light(useMaterial3: true);
 ThemeData dark = ThemeData.dark(useMaterial3: true);
@@ -76,7 +77,7 @@ class _textInputBoxState extends State<textInputBox> {
               onTap: () => {
                 Navigator.pop(context),
                 Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => DairyPage()),
+                  MaterialPageRoute(builder: (context) => DairyInput()),
                 ),
               },
             ),
@@ -237,7 +238,7 @@ class AboutPage extends StatelessWidget {
               onTap: () => {
                 Navigator.pop(context),
                 Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => DairyPage()),
+                  MaterialPageRoute(builder: (context) => DairyInput()),
                 ),
               },
             ),
@@ -271,60 +272,6 @@ class AboutPage extends StatelessWidget {
                   path: 'aboodJS/mahami',
                 ),
               ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class DairyPage extends StatefulWidget {
-  const DairyPage({super.key});
-
-  @override
-  State<DairyPage> createState() => _DairyPageState();
-}
-
-class _DairyPageState extends State<DairyPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("مهامي"), centerTitle: true),
-
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(color: Colors.blue),
-              child: Text('مهامي'),
-            ),
-            ListTile(
-              title: Text("tasks"),
-              onTap: () => {
-                Navigator.pop(context),
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => textInputBox()),
-                ),
-              },
-            ),
-            ListTile(
-              title: Text("Dairy"),
-              onTap: () => {
-                Navigator.pop(context),
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => DairyPage()),
-                ),
-              },
-            ),
-            ListTile(
-              title: Text("about"),
-              onTap: () => {
-                Navigator.pop(context),
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => AboutPage()),
-                ),
-              },
             ),
           ],
         ),
