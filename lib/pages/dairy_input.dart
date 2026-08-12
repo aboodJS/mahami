@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mahami/pages/dairy_page.dart';
 
 class DairyInput extends StatefulWidget {
   const DairyInput({super.key});
@@ -10,6 +11,14 @@ class DairyInput extends StatefulWidget {
 class _DairyInputState extends State<DairyInput> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        leading: BackButton(
+          onPressed: () => Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => DairyPage()),
+          ),
+        ),
+      ),
+    );
   }
 }

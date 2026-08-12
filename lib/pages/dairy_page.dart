@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import "../main.dart";
+import "./dairy_input.dart";
+import '../main.dart';
 
 class DairyPage extends StatefulWidget {
   const DairyPage({super.key});
@@ -9,6 +10,7 @@ class DairyPage extends StatefulWidget {
 }
 
 class _DairyPageState extends State<DairyPage> {
+  List entries = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,9 +54,18 @@ class _DairyPageState extends State<DairyPage> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.green.shade800,
-        onPressed: null,
+        onPressed: () => Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => DairyInput()),
+        ),
         tooltip: "click to add a diary entry",
         child: Icon(Icons.add, color: Colors.white),
+      ),
+      body: Column(
+        children: [
+          if (entries.isEmpty)
+            Expanded(child: Center(child: Text("You have no dairy entries"))),
+        ],
       ),
     );
   }
